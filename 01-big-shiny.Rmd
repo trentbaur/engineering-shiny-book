@@ -285,7 +285,7 @@ knitr::include_graphics("img/controlflow.png")
 
 *(The following paragraph details the algorithm implementation, feel free to skip it if you are not interested in the implementation details)*\
 The complexity number is then computed by taking the number of nodes, subtracting the number of edges, and adding twice the number of connected components of this graph.
-The algorithm is then $M = E − N + 2P$, where $M$ is the measure, $E$ the number of edges, $N$ the number of nodes and $2P$ is twice the number of connected components.
+The algorithm is then $M = N - E + 2P$, where $M$ is the measure, $E$ the number of edges, $N$ the number of nodes and $2P$ is twice the number of connected components.
 We will not go deep into this topic, as there are a lot things going on in this computation and you can find much documentation about this online.
 Please refer to the bibliography for further readings about the theory behind this measurement.
 
@@ -376,7 +376,7 @@ You might have heard this saying: "*if you copy and paste a piece of code twice,
 Indeed, splitting code into smaller pieces lowers the local cyclomatic complexity, as smaller functions have lower cyclomatic complexity.
 But that is just at a local level, and it can be a suboptimal option: having a very large number of functions calling each other can make it harder to navigate through the codebase.
 
-In the end of the day splitting into smaller functions is not a magic solution because:
+At the end of the day splitting into smaller functions is not a magic solution because:
 
 -   The global complexity of the app is not lowered by splitting things into pieces (just local complexity)
 -   The deeper the call stack, the harder it can be to debug
@@ -401,7 +401,7 @@ remotes::install_github("MangoTheCat/packageMetrics2")
 ```
 
 This package can now be used to assess the dependencies we use in our application.
-To do that, let's create a small function that computes this metric and return a tibble:
+To do that, let's create a small function that computes this metric and returns a tibble:
 
 ```{r 01-big-shiny-25 }
 library(packageMetrics2)
@@ -468,12 +468,12 @@ desc::desc_get_deps("golex/DESCRIPTION")
 attachment::att_from_description("golex/DESCRIPTION")
 ```
 
-Some important metrics to watch there are:
+Some important metrics to watch are:
 
 -   Test coverage: the more the better, as a large code coverage should imply that bugs are more easily caught.
--   The number of downloads: a largely downloaded package will likely be less prone to bug, as it will be used by a large user-base.
--   Number of dependencies: the more a package has dependencies, the more likely it is that at some point it time something in the dependency graph will break.
--   Dates of first publish on CRAN, last publish, and updates: a package actively maintained are a good sign[^big-shiny-10].
+-   The number of downloads: a largely downloaded package will likely be less prone to bugs, as it will be used by a large user-base.
+-   Number of dependencies: the more dependencies a package has, the more likely it is that at some point in time something in the dependency graph will break.
+-   Dates of first publish on CRAN, last publish, and updates: an actively maintained package are a good sign[^big-shiny-10].
 
 [^big-shiny-10]:  Even if this is not an absolute rule: some packages haven't been updated for a long time but are still completely reliable.
 
@@ -502,7 +502,7 @@ To make your project a success, you need to use tools that reduce the complexity
 
 [^big-shiny-11]: By production-grade, we mean a software that can be used in a context where people use it for doing their job, and where failures or bugs have real-life consequences.
 
-In other words, production-grade `{shiny}` apps require working with a software engineering mindset, which is not always an easy task in the R world: many R developers have learned this language as a tool for doing data analysis, building model, making statistics, not really as a tool for building software.
+In other words, production-grade `{shiny}` apps require working with a software engineering mindset, which is not always an easy task in the R world: many R developers have learned this language as a tool for doing data analysis, building models, making statistics, not really as a tool for building software.
 
 The use of R has evolved since its initial version released in 1995, and using this programming language as a tool to build software for production is still a challenge, even `r lubridate::year(Sys.Date()) - 1995` years after its first release.
 And still today, for a lot of R users, the software is still used as an "experimentation tool", where production quality is one of the least concerns.
@@ -538,7 +538,7 @@ Anybody that has already worked on a code base as a team knows it is not an easy
 The project is a success if the application was delivered, and if **it answers the question it is supposed to answer, or serves the purpose it is supposed to serve**.
 Delivering is not the only thing to keep in mind: you can deliver a working app but it might not work the way it is supposed to work.
 
-Just as before, accuracy means that between the moment the idea appears in someone's mind and the moment the app is actually ready to be used, everybody was able to work together toward a common goal, and that now this goal is reached, we are also certain that the answers we get from the application are accurate, and that users can rely on the application to make decision.
+Just as before, accuracy means that between the moment the idea appears in someone's mind and the moment the app is actually ready to be used, everybody was able to work together toward a common goal, and now that this goal is reached, we are also certain that the answers we get from the application are accurate, and that users can rely on the application to make decisions.
 
 ### It is usable
 
