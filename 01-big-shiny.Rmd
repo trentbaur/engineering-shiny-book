@@ -126,7 +126,7 @@ In R, the number of lines of code depends on your coding style and the packages 
 . For example, the `{tidyverse}` [@tidyverse2019] style guide encourages the use of `%>%` (called "pipe"), with one function by line, producing more lines in the end code: "*`%>%` should always have a space before it, and should usually be followed by a new line*" [tidyverse style guide](https://style.tidyverse.org/pipes.html){target="_blank"}. So you can expect a "tidyverse-centric" package to contain more lines of code, yet the pipe itself has been thought as a tool to lower code complexity by enhancing its readability
 [^big-shiny-7].
 
-[^big-shiny-6]: The minification process is the process of removing all blank characters and put everything on one line so that the file in the output is much smaller.
+[^big-shiny-6]: The minification process is the process of removing all blank characters and putting everything on one line so that the file in the output is much smaller.
 
 [^big-shiny-7]: Note though that some users find using the pipe more complex.
 
@@ -475,7 +475,7 @@ Some important metrics to watch are:
 -   Number of dependencies: the more dependencies a package has, the more likely it is that at some point in time something in the dependency graph will break.
 -   Dates of first publish on CRAN, last publish, and updates: an actively maintained package are a good sign[^big-shiny-10].
 
-[^big-shiny-10]:  Even if this is not an absolute rule: some packages haven't been updated for a long time but are still completely reliable.
+[^big-shiny-10]:  Even this is not an absolute rule: some packages haven't been updated for a long time but are still completely reliable.
 
 #### D. Complexity Assessment Checklist {.unnumbered}
 
