@@ -15,8 +15,8 @@ But in a world where `{shiny}` applications are mostly created as a series of fi
 
 You probably haven't realized it yet, but if you have built a significant (in terms of size or complexity of the code base) `{shiny}` application, chances are you have been using a package-like structure without knowing it.
 
-Think about your last `{shiny}` application which was created as a single-file (`app.R`) or two-files app (`ui.R` and `server.R`).
-On top of these files, what do you needed to make it **a production-ready application**, and why is a package the perfect infrastructure?
+Think about your last `{shiny}` application which was created as a single-file (`app.R`) or two-file app (`ui.R` and `server.R`).
+On top of these files, what is needed to make it **a production-ready application**, and why is a package the perfect infrastructure?
 
 #### A. It has metadata {.unnumbered}
 
@@ -52,7 +52,7 @@ When you want to push your app into production, you do not want to have this con
 
 -   *R-dev: Ah, you got to do `library(shiny)` at the beginning of your script. And `library(purrr)`, and `library(jsonlite)`, and...*
 
-For example here, this `library(purrr)` and `library(jsonlite)` will lead to a NAMESPACE conflict on the `flatten()` function that can cause you some debugging headache (trust us, we have been there before).
+In this example, `library(purrr)` and `library(jsonlite)` will lead to a NAMESPACE conflict on the `flatten()` function and that will cause you some debugging headache (trust us, we have been there before).
 It would be cool if we could have a `{shiny}` app that only imports specific functions from a package, right?
 
 We can not stress enough that **dependencies matter**.
@@ -77,17 +77,17 @@ Documenting your `{shiny}` app involves explaining features to the end users and
 The good news is that using the R package structure helps you leverage the common tools for documentation in R:
 
 -   A `README` file that you will put at the root of your package, which will document how to install the package, and some information about how to use the package. Note that in many cases developers go for a `.md` file (short for markdown) because this format is automatically rendered on services like GitHub, GitLab, or any other main version control system.\
--   `Vignettes` are longer form documentation that explain in more depth how to use your app. There are also useful if you need to detail the core functions of the application using a static document, notably for prototyping and/or for exchanging with the client. We will get back to `Vignettes` in Chapter \@ref(building-ispum-app) when we will talk about prototyping.
--   Function documentation. Every function in your package should come with its own documentation, even if it is just for your future self. "Exported" functions, the one which are available once you run `library(myapp)`, should be fully documented and will be listed in the package help page. Internal functions need less documentation, but documenting them is the best way to be sure you can come back to the app in a few months and still know why things are the way they are, what the pieces of the apps are used for, and how to use these functions [^structure-1] .
--   If needed, you can build a `{pkgdown}` website, that can either be deployed on the web or kept internally. It can contain installation steps for I.T., internal features use for developers, a user guide, etc.
+-   `Vignettes` are longer form documentation that explain in more depth how to use your app. These are also useful if you need to detail the core functions of the application using a static document, notably for prototyping and/or for exchanging with the client. We will get back to `Vignettes` in Chapter \@ref(building-ispum-app) when we will talk about prototyping.
+-   Function documentation. Every function in your package should come with its own documentation, even if it is just for your future self. "Exported" functions, the ones which are available once you run `library(myapp)`, should be fully documented and listed in the package help page. Internal functions need less documentation, but documenting them is the best way to be sure you can come back to the app in a few months and still know why things are the way they are, what the pieces of the apps are used for, and how to use these functions [^structure-1] .
+-   If needed, you can build a `{pkgdown}` website, that can either be deployed on the web or kept internally. It can contain installation steps for I.T., internal features for use by developers, a user guide, etc.
 
 [^structure-1]: `{roxygen2}` comes with a `@noRd` tag, that prevents the documentation from being built.
-    This allows to still write the documentation using the same tags as the exported function, without the internal functions being documented in the end package.
-    For example, that is why by default the modules built with `{golem}` version \> 0.2.0 come with `@noRd`: you should document them, but chances are your do not need to export them.
+    This allows one to still write documentation using the same tags as the exported function, without the internal functions being documented in the end package.
+    For example, that is why by default the modules built with `{golem}` version \> 0.2.0 come with `@noRd`: you should document them, but chances are you do not need to export them.
 
 #### E. It's tested {.unnumbered}
 
-The other thing we need for our application to be successful on the long run is a testing infrastructure, so that we are sure we are not introducing any regression along development.
+The other thing we need for our application to be successful in the long run is a testing infrastructure, so that we are sure we are not introducing any regression during development.
 
 **Nothing should go to production without being tested. Nothing.**
 
@@ -104,7 +104,7 @@ Oh, and it would also be nice if people could get a `tar.gz` and install it on t
 Or if we could install that on the server without any headache!
 
 When adopting the package structure, you can use classical tools to locally install your `{shiny}` application, *i.e* as any other R package, built as a `tar.gz`.
-On a server, be it RStudio products or as Docker containers, the package infrastructure will also allow to leverage the native R tools to build, install and launch R code.
+On a server, be it RStudio products or as Docker containers, the package infrastructure will also allow you to leverage the native R tools to build, install and launch R code.
 
 More about this in chapter \@ref(\#deploy).
 
@@ -141,7 +141,7 @@ If you need to read some resources before continuing, feel free to have a look a
 
 Modules are one of the most powerful tools for building `{shiny}` Applications in a maintainable and sustainable manner.
 
-### Why using `{shiny}` modules?
+### Why use `{shiny}` modules?
 
 Small is beautiful.
 Being able to properly cut a codebase into small modules will help developers build a mental model of the application (Remember ["What is a complex `{shiny}` Application?"](#complex-shiny)).
@@ -160,7 +160,7 @@ A big `{shiny}` application usually requires reusing pieces of ui/server, which 
 And, unfortunately, we can not bypass that: when you send a plot **from R to the browser**, i.e from the `server` to the `ui`, the browser needs to know exactly where to put this element.
 This "exactly where" is handled through the use of an `id`.
 Ids are not `{shiny}` specific: they are at the very root of the way web pages work.
-Understanding all of this is not the purpose of this chapter: just remember that `{shiny}` inputs and outputs ids **have** to be unique, just as any id on a webpage, so that the browser knows where to put what it receives from R, and R knows what to listen to from the browser.
+Understanding all of this is not the purpose of this chapter: just remember that `{shiny}` input and output ids **have** to be unique, just like any id on a webpage, so that the browser knows where to put what it receives from R, and R knows what to listen to from the browser.
 The need to be unique is made a little bit complex by the way `{shiny}` handles the names, as it shares a global pool for all the id names, with no native way to use namespaces.
 Wait, namespaces?
 
@@ -248,7 +248,7 @@ We assume that you know the saying that *"if you copy and paste something more t
 In a `{shiny}` application, how can we refactor a partially repetitive piece of code so that it is reusable?
 
 Yes, you guessed right: using shiny modules.
-**`{shiny}` modules aim at three things: simplifying "id" namespacing, split the code base into a series of functions, and allow UI/Server parts of your app to be reused. Most of the time, modules are used to do the two first. In our case, we could say that 90% of the modules we write are never reused [^structure-2] ; they are here to allow us to split the code base into smaller, more manageable pieces**.
+**`{shiny}` modules aim at three things: simplifying "id" namespacing, splitting the code base into a series of functions, and allowing UI/Server parts of your app to be reused. Most of the time, modules are used to doing the first two. In our case, we could say that 90% of the modules we write are never reused [^structure-2] ; they are here to allow us to split the code base into smaller, more manageable pieces**.
 
 [^structure-2]: Most of the time, pieces / panels of the app are too unique to be reused elsewhere.
 
@@ -265,11 +265,11 @@ It is even easier if you are working with `{golem}`, which promotes the use of m
 
 "*Yes, but I just want to write a small app, nothing fancy*"
 
-A production apps almost always started as a small Proof of Concept.
+A production app almost always starts as a small Proof of Concept.
 Then, the small PoC becomes an interesting idea.
 Then, this idea becomes a strategic asset.
 And before you know it, your 'not-that-fancy' app needs to become larger and larger.
-So, you will be better off starting on solid foundations from the very beginning.
+So, you will be better off starting on a solid foundation from the very beginning.
 
 ### A practical walk through
 
